@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anti Rug Token - $ART</title>
+  <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
   <style>
     /* General Styles */
     body {
@@ -18,11 +19,23 @@
       text-transform: uppercase;
     }
 
+    /* Styled $ART */
+    .styled-art {
+      font-size: 3.5rem;
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #34ebba, #5ec1f5, #8f6aff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
+      display: inline-block;
+    }
+
     /* Header Section */
     header {
       text-align: center;
       padding: 80px 20px;
-      background: url('https://i.imgur.com/kdmvQpi.png') center no-repeat;
+      background: url('https://i.imgur.com/rYF2obO.jpeg') center no-repeat;
       background-size: cover;
       position: relative;
       color: #fff;
@@ -38,9 +51,10 @@
       z-index: 0;
     }
     header h1 {
-      font-size: 3.5rem;
+      font-size: 2.5rem;
       z-index: 1;
       position: relative;
+      margin: 0;
     }
     header p {
       font-size: 1.2rem;
@@ -49,7 +63,7 @@
       z-index: 1;
       position: relative;
     }
-    .cta-button {
+    .cta-button, .connect-wallet-btn {
       display: inline-block;
       margin-top: 20px;
       padding: 10px 30px;
@@ -62,69 +76,11 @@
       font-weight: bold;
       position: relative;
       z-index: 1;
+      cursor: pointer;
     }
-    .cta-button:hover {
+    .cta-button:hover, .connect-wallet-btn:hover {
       background: #28c598;
       color: #fff;
-    }
-
-    /* Features Section */
-    section {
-      padding: 40px 20px;
-      text-align: center;
-      position: relative;
-    }
-    section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -50%;
-      width: 200%;
-      height: 100%;
-      background: linear-gradient(to right, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
-      transform: rotate(-15deg);
-      z-index: -1;
-    }
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .feature {
-      flex: 1 1 300px;
-      background: rgba(0, 0, 0, 0.8);
-      border: 2px solid #34ebba;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
-      transition: transform 0.3s ease;
-    }
-    .feature:hover {
-      transform: translateY(-10px);
-    }
-    .feature h3 {
-      color: #34ebba;
-      margin-bottom: 15px;
-    }
-
-    /* Vision Section */
-    .artwork {
-      padding: 60px 20px;
-      text-align: center;
-      background: linear-gradient(to bottom, #415a77, #1b263b);
-    }
-    .artwork img {
-      max-width: 100%;
-      height: auto;
-      margin: 20px auto;
-      border-radius: 10px;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
-    }
-    .artwork h2 {
-      color: #34ebba;
     }
 
     /* Footer */
@@ -151,32 +107,27 @@
 </head>
 <body>
   <header>
-    <h1>Anti Rug Token ($ART)</h1>
-    <p>Anti Rug Token ($ART) is a Solana-based cryptocurrency created to stand in solidarity with victims of rug pulls. Our mission is to rebuild trust and security in the blockchain community.</p>
-    <a href="#features" class="cta-button">Learn More</a>
+    <h1>Anti Rug Token <span class="styled-art">$ART</span></h1>
+    <p>Anti Rug Token <span class="styled-art">$ART</span> is a Solana-based cryptocurrency created to stand in solidarity with victims of rug pulls. Our mission is to rebuild trust and security in the blockchain community.</p>
+    <button class="connect-wallet-btn" onclick="connectWallet()">Connect Wallet</button>
   </header>
 
   <section id="features">
-    <h2>Why Choose $ART?</h2>
+    <h2>Why Choose <span class="styled-art">$ART</span>?</h2>
     <div class="features">
       <div class="feature">
         <h3>Token Swap Insurance</h3>
-        <p>Protect your investments with insurance against rug pulls. Secure your swaps with $ART.</p>
+        <p>Protect your investments with insurance against rug pulls. Secure your swaps with <span class="styled-art">$ART</span>.</p>
       </div>
       <div class="feature">
         <h3>Community Governance</h3>
-        <p>Be part of the decision-making process. Hold $ART and vote on future developments.</p>
+        <p>Be part of the decision-making process. Hold <span class="styled-art">$ART</span> and vote on future developments.</p>
       </div>
       <div class="feature">
         <h3>Transparency & Trust</h3>
-        <p>Our mission is to create a safer crypto ecosystem. Every move is trackable and auditable.</p>
+        <p>Our mission is to create a safer crypto ecosystem. Every move is trackable and auditable with <span class="styled-art">$ART</span>.</p>
       </div>
     </div>
-  </section>
-
-  <section class="artwork">
-    <h2>Our Vision, Captured</h2>
-    <img src="https://i.imgur.com/kdmvQpi.png" alt="Anti Rug Token Artwork">
   </section>
 
   <footer id="footer">
@@ -187,5 +138,28 @@
       <a href="https://telegram.org" target="_blank">Telegram</a>
     </div>
   </footer>
+
+  <script>
+    async function connectWallet() {
+      try {
+        // Check if Phantom is installed
+        const { solana } = window;
+        if (!solana || !solana.isPhantom) {
+          alert("Phantom Wallet is not installed. Please install it from https://phantom.app");
+          return;
+        }
+
+        // Connect to the wallet
+        const response = await solana.connect();
+        const walletAddress = response.publicKey.toString();
+
+        // Display wallet address or success message
+        alert(`Wallet connected: ${walletAddress}`);
+      } catch (err) {
+        console.error("Error connecting to wallet:", err.message);
+        alert("Failed to connect to wallet. Please try again.");
+      }
+    }
+  </script>
 </body>
 </html>
