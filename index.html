@@ -4,45 +4,93 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anti Rug Token - $ART</title>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
   <style>
+    /* General Styles */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: linear-gradient(to bottom, #0d1b2a, #1b263b, #415a77);
       color: #fff;
+      overflow-x: hidden;
     }
     h1, h2, h3 {
       font-family: 'Orbitron', sans-serif;
       text-transform: uppercase;
     }
-    .community-section, .swap-section {
-      padding: 20px;
-      text-align: center;
-      background: #1b263b;
-      border-top: 2px solid #34ebba;
-    }
-    .community-section h2, .swap-section h2 {
-      color: #34ebba;
-    }
-    .coming-soon {
-      margin: 20px auto;
-      font-size: 1.5rem;
-      color: #ddd;
+
+    /* Styled $ART */
+    .styled-art {
+      font-size: 3.5rem;
+      font-family: 'Orbitron', sans-serif;
       text-transform: uppercase;
-      padding: 10px 20px;
-      border: 2px dashed #34ebba;
-      border-radius: 10px;
+      background: linear-gradient(90deg, #34ebba, #5ec1f5, #8f6aff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
       display: inline-block;
     }
-    .footer {
+
+    /* Header Section */
+    header {
+      text-align: center;
+      padding: 80px 20px;
+      background: url('https://i.imgur.com/rYF2obO.jpeg') center no-repeat;
+      background-size: cover;
+      position: relative;
+      color: #fff;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 0;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      z-index: 1;
+      position: relative;
+      margin: 0;
+    }
+    header p {
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 10px auto;
+      z-index: 1;
+      position: relative;
+    }
+    .cta-button, .connect-wallet-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 30px;
+      font-size: 1rem;
+      color: #0d1b2a;
+      background: #34ebba;
+      border: none;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      position: relative;
+      z-index: 1;
+      cursor: pointer;
+    }
+    .cta-button:hover, .connect-wallet-btn:hover {
+      background: #28c598;
+      color: #fff;
+    }
+
+    /* Footer */
+    footer {
       text-align: center;
       padding: 20px;
       background: #111;
       color: #fff;
     }
-    .footer p {
+    footer p {
       margin: 0;
       font-size: 0.9rem;
     }
@@ -60,85 +108,58 @@
 <body>
   <header>
     <h1>Anti Rug Token <span class="styled-art">$ART</span></h1>
-    <p>Join our community and interact with other $ART enthusiasts.</p>
+    <p>Anti Rug Token <span class="styled-art">$ART</span> is a Solana-based cryptocurrency created to stand in solidarity with victims of rug pulls. Our mission is to rebuild trust and security in the blockchain community.</p>
+    <button class="connect-wallet-btn" onclick="connectWallet()">Connect Wallet</button>
   </header>
 
-  <section class="swap-section" id="token-swap">
-    <h2>Token Swap</h2>
-    <div class="coming-soon">Coming Soon</div>
+  <section id="features">
+    <h2>Why Choose <span class="styled-art">$ART</span>?</h2>
+    <div class="features">
+      <div class="feature">
+        <h3>Token Swap Insurance</h3>
+        <p>Protect your investments with insurance against rug pulls. Secure your swaps with <span class="styled-art">$ART</span>.</p>
+      </div>
+      <div class="feature">
+        <h3>Community Governance</h3>
+        <p>Be part of the decision-making process. Hold <span class="styled-art">$ART</span> and vote on future developments.</p>
+      </div>
+      <div class="feature">
+        <h3>Transparency & Trust</h3>
+        <p>Our mission is to create a safer crypto ecosystem. Every move is trackable and auditable with <span class="styled-art">$ART</span>.</p>
+      </div>
+    </div>
   </section>
 
-  <section class="community-section" id="community">
-    <h2>Community Wall</h2>
-    <form class="message-form" id="messageForm">
-      <input type="text" id="username" placeholder="Your Name" required>
-      <textarea id="message" rows="4" placeholder="Your Message" required></textarea>
-      <button type="submit">Post Message</button>
-    </form>
-    <div class="message-list" id="messageList"></div>
-  </section>
-
-  <footer class="footer">
+  <footer id="footer">
     <p>&copy; 2025 Anti Rug Token. All rights reserved.</p>
     <div class="social-icons">
-      <a href="https://x.com/A_R_TSOL?s=09" target="_blank">X</a>
+      <a href="https://twitter.com" target="_blank">Twitter</a>
       <a href="https://discord.com" target="_blank">Discord</a>
       <a href="https://telegram.org" target="_blank">Telegram</a>
     </div>
   </footer>
 
   <script>
-    // Firebase Configuration
-    const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_PROJECT_ID.appspot.com",
-      messagingSenderId: "YOUR_SENDER_ID",
-      appId: "YOUR_APP_ID",
-    };
+    async function connectWallet() {
+      try {
+        // Check if Phantom is installed
+        const { solana } = window;
+        if (!solana || !solana.isPhantom) {
+          alert("Phantom Wallet is not installed. Please install it from https://phantom.app");
+          return;
+        }
 
-    // Initialize Firebase
-    const app = firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
+        // Connect to the wallet
+        const response = await solana.connect();
+        const walletAddress = response.publicKey.toString();
 
-    // Post Message
-    const messageForm = document.getElementById('messageForm');
-    messageForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const username = document.getElementById('username').value;
-      const message = document.getElementById('message').value;
-
-      if (username && message) {
-        await db.collection('messages').add({
-          username,
-          message,
-          timestamp: new Date(),
-        });
-        messageForm.reset();
-        loadMessages();
+        // Display wallet address or success message
+        alert(`Wallet connected: ${walletAddress}`);
+      } catch (err) {
+        console.error("Error connecting to wallet:", err.message);
+        alert("Failed to connect to wallet. Please try again.");
       }
-    });
-
-    // Load Messages
-    const messageList = document.getElementById('messageList');
-    async function loadMessages() {
-      messageList.innerHTML = '';
-      const snapshot = await db.collection('messages').orderBy('timestamp', 'desc').get();
-      snapshot.forEach((doc) => {
-        const data = doc.data();
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('message');
-        messageDiv.innerHTML = `
-          <h4>${data.username}</h4>
-          <p>${data.message}</p>
-        `;
-        messageList.appendChild(messageDiv);
-      });
     }
-
-    // Load Messages on Page Load
-    loadMessages();
   </script>
 </body>
 </html>
