@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anti Rug Token - $ART</title>
-  <script src="https://cdn.jsdelivr.net/npm/@solana/web3.js@1.73.3/lib/index.iife.min.js"></script>
   <style>
     /* General Styles */
     body {
@@ -17,6 +16,16 @@
     h1, h2, h3 {
       font-family: 'Orbitron', sans-serif;
       text-transform: uppercase;
+    }
+    h2, h3 {
+      margin-bottom: 20px;
+    }
+    p, ul, li, ol {
+      margin: 10px 0;
+      line-height: 1.6;
+    }
+    ul, ol {
+      padding-left: 20px;
     }
 
     /* Styled $ART */
@@ -62,7 +71,8 @@
       z-index: 1;
       position: relative;
     }
-    .cta-button, .connect-wallet-btn {
+
+    .cta-button {
       display: inline-block;
       margin-top: 20px;
       padding: 10px 30px;
@@ -74,10 +84,9 @@
       text-decoration: none;
       font-weight: bold;
       position: relative;
-      z-index: 1;
       cursor: pointer;
     }
-    .cta-button:hover, .connect-wallet-btn:hover {
+    .cta-button:hover {
       background: #28c598;
       color: #fff;
     }
@@ -86,30 +95,17 @@
     #token-swap {
       padding: 50px 20px;
       background: linear-gradient(to bottom, #1b263b, #0d1b2a);
-      text-align: center;
     }
-    #token-swap h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-    #token-swap .description-box {
+    #token-swap .content-box {
       background: rgba(255, 255, 255, 0.1);
       padding: 20px;
       border-radius: 10px;
-      margin: 10px auto;
+      margin: 20px auto;
       max-width: 800px;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     }
-    #token-swap .description-box ul {
-      list-style: none;
-      padding: 0;
-      text-align: left;
-    }
-    #token-swap .description-box ul li {
-      margin: 10px 0;
-      padding: 10px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 5px;
+    #token-swap h3 {
+      text-align: center;
     }
 
     /* Footer */
@@ -138,23 +134,34 @@
   <header>
     <h1>Anti Rug Token <span class="styled-art">$ART</span></h1>
     <p>Anti Rug Token <span class="styled-art">$ART</span> is a Solana-based cryptocurrency created to stand in solidarity with victims of rug pulls. Our mission is to rebuild trust and security in the blockchain community.</p>
-    <button class="connect-wallet-btn" onclick="connectWallet()">Connect Wallet</button>
+    <button class="cta-button" onclick="purchaseART()">Purchase $ART</button>
   </header>
 
-  <section id="features">
-    <h2>Why Choose <span class="styled-art">$ART</span>?</h2>
-    <div class="description-box">
-      <p><strong>Token Swap Insurance for Anti Rug Token ($ART)</strong></p>
-      <p>
-        Token Swap Insurance provides a layer of security for investors when swapping or investing in new tokens, protecting them from potential rug pulls.
-        Here's how it works:
-      </p>
+  <section id="token-swap">
+    <h2>Token Swap Insurance</h2>
+    <div class="content-box">
+      <h3>Concept Overview</h3>
+      <p>The insurance system acts as a safety net for users investing in untested or new projects by offering partial reimbursement in the event of a rug pull. ART holders can stake their tokens to participate in the insurance pool, and insured users pay premiums in ART tokens for coverage.</p>
+    </div>
+
+    <div class="content-box">
+      <h3>Key Features</h3>
       <ul>
-        <li><strong>Insurance Coverage:</strong> Protects a percentage of the user's swap amount (e.g., 70-80%).</li>
-        <li><strong>Premium Payments:</strong> Users pay premiums in ART tokens for coverage.</li>
-        <li><strong>Community-Managed Pool:</strong> ART holders stake tokens to fund the insurance pool.</li>
-        <li><strong>Rug Pull Verification:</strong> Community verifies rug pulls before payouts.</li>
+        <li><strong>Insurance Coverage:</strong> Protects a percentage of the user’s swap amount (e.g., 70-80%). Covers tokens swapped on decentralized exchanges like Raydium or Serum.</li>
+        <li><strong>Premium Payments:</strong> Users pay premiums in ART tokens. Premium rates vary based on risk.</li>
+        <li><strong>Community-Managed Pool:</strong> Premiums are collected in a decentralized pool funded by ART stakers and used for payouts.</li>
+        <li><strong>Rug Pull Verification:</strong> A decentralized panel verifies rug pulls before payouts.</li>
       </ul>
+    </div>
+
+    <div class="content-box">
+      <h3>How It Works</h3>
+      <ol>
+        <li><strong>User Buys Insurance:</strong> Users pay premiums in ART tokens for coverage while swapping tokens.</li>
+        <li><strong>Stakeholders Fund the Pool:</strong> ART holders stake tokens to earn a portion of the premiums.</li>
+        <li><strong>Community Verification:</strong> A decentralized panel verifies claims using tools like Solscan.</li>
+        <li><strong>Payout:</strong> Verified claims are reimbursed from the insurance pool.</li>
+      </ol>
     </div>
   </section>
 
@@ -167,24 +174,24 @@
   </footer>
 
   <script>
-    async function connectWallet() {
+    async function purchaseART() {
       try {
-        // Check if Phantom is installed
         const { solana } = window;
+
         if (!solana || !solana.isPhantom) {
-          alert("Phantom Wallet is not installed. Please install it from https://phantom.app");
+          alert("Please install the Phantom Wallet extension to purchase $ART.");
           return;
         }
 
-        // Connect to the wallet
+        // Connect to Phantom Wallet
         const response = await solana.connect();
         const walletAddress = response.publicKey.toString();
 
-        // Display wallet address or success message
-        alert(`Wallet connected: ${walletAddress}`);
-      } catch (err) {
-        console.error("Error connecting to wallet:", err.message);
-        alert("Failed to connect to wallet. Please try again.");
+        alert(`Phantom Wallet connected: ${walletAddress}. Redirecting to the purchase page...`);
+        window.location.href = "https://example.com/purchase-art"; // Replace with your $ART purchase link
+      } catch (error) {
+        console.error("Error connecting to Phantom Wallet:", error.message);
+        alert("Failed to connect to Phantom Wallet. Please try again.");
       }
     }
   </script>
