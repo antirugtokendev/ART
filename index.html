@@ -3,72 +3,136 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Anti Rug Token - ART</title>
+  <title>Anti Rug Token - $ART</title>
   <style>
+    /* General Styles */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #141e30, #243b55);
+      background: linear-gradient(to bottom, #0d1b2a, #1b263b, #415a77);
       color: #fff;
+      overflow-x: hidden;
     }
+    h1, h2, h3 {
+      font-family: 'Orbitron', sans-serif;
+      text-transform: uppercase;
+    }
+
+    /* Header Section */
     header {
       text-align: center;
-      padding: 50px 20px;
+      padding: 80px 20px;
+      background: url('https://i.imgur.com/kdmvQpi.png') center no-repeat;
+      background-size: cover;
+      position: relative;
+      color: #fff;
     }
-    header img {
-      width: 150px;
-      border-radius: 10px;
-      margin-bottom: 20px;
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 0;
     }
     header h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
+      font-size: 3.5rem;
+      z-index: 1;
+      position: relative;
     }
     header p {
       font-size: 1.2rem;
-      margin: 10px auto;
       max-width: 600px;
+      margin: 10px auto;
+      z-index: 1;
+      position: relative;
     }
     .cta-button {
       display: inline-block;
       margin-top: 20px;
       padding: 10px 30px;
       font-size: 1rem;
-      color: #141e30;
+      color: #0d1b2a;
       background: #34ebba;
       border: none;
       border-radius: 5px;
       text-decoration: none;
       font-weight: bold;
+      position: relative;
+      z-index: 1;
     }
     .cta-button:hover {
       background: #28c598;
+      color: #fff;
     }
+
+    /* Features Section */
     section {
       padding: 40px 20px;
       text-align: center;
+      position: relative;
+    }
+    section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -50%;
+      width: 200%;
+      height: 100%;
+      background: linear-gradient(to right, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+      transform: rotate(-15deg);
+      z-index: -1;
     }
     .features {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+      gap: 20px;
+      max-width: 1200px;
       margin: 0 auto;
     }
     .feature {
       flex: 1 1 300px;
-      margin: 20px;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.8);
+      border: 2px solid #34ebba;
       padding: 20px;
       border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+      transition: transform 0.3s ease;
+    }
+    .feature:hover {
+      transform: translateY(-10px);
     }
     .feature h3 {
       color: #34ebba;
+      margin-bottom: 15px;
     }
+
+    /* Vision Section */
+    .artwork {
+      padding: 60px 20px;
+      text-align: center;
+      background: linear-gradient(to bottom, #415a77, #1b263b);
+    }
+    .artwork img {
+      max-width: 100%;
+      height: auto;
+      margin: 20px auto;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+    }
+    .artwork h2 {
+      color: #34ebba;
+    }
+
+    /* Footer */
     footer {
       text-align: center;
       padding: 20px;
       background: #111;
+      color: #fff;
     }
     footer p {
       margin: 0;
@@ -83,33 +147,25 @@
     .social-icons a:hover {
       color: #28c598;
     }
-    .artwork img {
-      max-width: 100%;
-      height: auto;
-      margin: 30px auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-    }
   </style>
 </head>
 <body>
   <header>
-    <img src="your-artwork-url-here.png" alt="Anti Rug Token Artwork">
-    <h1>Anti Rug Token (ART)</h1>
-    <p>Anti Rug Token (ART) is a Solana-based cryptocurrency created to stand in solidarity with victims of rug pulls. We understand the frustration and financial loss these scams cause, and we aim to build trust and security in the blockchain community.</p>
+    <h1>Anti Rug Token ($ART)</h1>
+    <p>Anti Rug Token ($ART) is a Solana-based cryptocurrency created to stand in solidarity with victims of rug pulls. Our mission is to rebuild trust and security in the blockchain community.</p>
     <a href="#features" class="cta-button">Learn More</a>
   </header>
 
   <section id="features">
-    <h2>Why Choose ART?</h2>
+    <h2>Why Choose $ART?</h2>
     <div class="features">
       <div class="feature">
         <h3>Token Swap Insurance</h3>
-        <p>Protect your investments with insurance against rug pulls. Secure your swaps with ART.</p>
+        <p>Protect your investments with insurance against rug pulls. Secure your swaps with $ART.</p>
       </div>
       <div class="feature">
         <h3>Community Governance</h3>
-        <p>Be part of the decision-making process. Hold ART and vote on future developments.</p>
+        <p>Be part of the decision-making process. Hold $ART and vote on future developments.</p>
       </div>
       <div class="feature">
         <h3>Transparency & Trust</h3>
@@ -118,15 +174,9 @@
     </div>
   </section>
 
-  <section id="cta">
-    <h2>Join the Anti Rug Movement</h2>
-    <p>Get started with ART today and be a part of the future of secure crypto investing.</p>
-    <a href="#footer" class="cta-button">Buy ART Now</a>
-  </section>
-
   <section class="artwork">
     <h2>Our Vision, Captured</h2>
-    <img src="your-artwork-url-here.png" alt="Anti Rug Token Artwork">
+    <img src="https://i.imgur.com/kdmvQpi.png" alt="Anti Rug Token Artwork">
   </section>
 
   <footer id="footer">
